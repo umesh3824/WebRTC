@@ -19,12 +19,12 @@ function createRoom() {
     peer.on('open', (id) => {
         console.log("Peer Connected with ID: ", id)
         hideModal()
-        // getUserMedia({ video: true, audio: true }, (stream) => {
-        //     local_stream = stream;
-        //     setLocalStream(local_stream)
-        // }, (err) => {
-        //     console.log(err)
-        // })
+        getUserMedia({ video: true, audio: true }, (stream) => {
+            local_stream = stream;
+            setLocalStream(local_stream)
+        }, (err) => {
+            console.log(err)
+        })
         notify("Waiting for peer to join.")
     })
     peer.on('call', (call) => {
@@ -75,18 +75,18 @@ function joinRoom() {
     peer = new Peer()
     peer.on('open', (id) => {
         console.log("Connected with Id: " + id)
-        // getUserMedia({ video: true, audio: true }, (stream) => {
-        //     local_stream = stream;
-        //     setLocalStream(local_stream)
-        //     notify("Joining peer")
-        //     let call = peer.call(room_id, stream)
-        //     call.on('stream', (stream) => {
-        //         setRemoteStream(stream);
-        //     })
-        //     currentPeer = call;
-        // }, (err) => {
-        //     console.log(err)
-        // })
+        getUserMedia({ video: true, audio: true }, (stream) => {
+            local_stream = stream;
+            setLocalStream(local_stream)
+            notify("Joining peer")
+            let call = peer.call(room_id, stream)
+            call.on('stream', (stream) => {
+                setRemoteStream(stream);
+            })
+            currentPeer = call;
+        }, (err) => {
+            console.log(err)
+        })
 
     })
 }
